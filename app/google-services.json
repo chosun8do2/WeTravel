@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "208525391138",
+    "firebase_url": "https://wetravel-b6b10.firebaseio.com",
+    "project_id": "wetravel-b6b10",
+    "storage_bucket": "wetravel-b6b10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:208525391138:android:2f3d5d490514cda6",
+        "android_client_info": {
+          "package_name": "org.mrlee.wetravel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "208525391138-dicpggee1voed2v7vs7msek127n393u2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.mrlee.wetravel",
+            "certificate_hash": "ef650bdcbd8e1eec35afe35090d1bfacb76ef3df"
+          }
+        },
+        {
+          "client_id": "208525391138-v3ivsk4ajqco6rapa58ogpktqadrias9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBno4XdmXJ83VgNsswdv8uWAvV9KrAnRc8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "208525391138-v3ivsk4ajqco6rapa58ogpktqadrias9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "208525391138-k0qqmc6hf5i63ihgs7ubdvm5c6a5knb1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.mrlee.wetravel"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

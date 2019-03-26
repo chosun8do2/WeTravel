@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.mrlee.wetravel.RegisterActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RadioGroup
+            android:id="@+id/rdgroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <RadioButton
+                android:id="@+id/man_button"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="남자"
+                android:layout_weight="1"
+                android:padding="6dip"/>
+
+            <RadioButton
+                android:id="@+id/woman_button"
+                android:text="여자"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:padding="6dip"/>
+
+
+        </RadioGroup>
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/relativelayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+        <ImageView
+            android:id="@+id/add_profileImage"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/myprofileImageTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/add_profileImage"
+            android:layout_alignLeft="@id/add_profileImage"
+            android:layout_alignRight="@id/add_profileImage"
+            android:layout_alignTop="@id/add_profileImage"
+            android:layout_margin="1dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="프로필사진 추가"
+            android:textSize="18dp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/emailLabels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이메일" />
+
+        <EditText
+            android:id="@+id/emailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="귀하의 이메일"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+        android:id="@+id/passwardLabels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="비밀번호" />
+
+        <EditText
+            android:id="@+id/passwardText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="귀하의 비밀번호"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/checkpasswardLabels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="비밀번호확인" />
+
+        <EditText
+            android:id="@+id/checkpasswardText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="귀하의 비밀번호확인"
+            android:ems="10"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/nameLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이름" />
+
+        <EditText
+            android:id="@+id/nameText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="귀하의 이름"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/languageLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사용 가능한 언어" />
+
+        <EditText
+            android:id="@+id/languageText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="귀하의 사용 가능한 언어"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/locationLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="위치" />
+
+        <EditText
+            android:id="@+id/locationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="귀하의 위치"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="계속하시게 되면 저희의 사용자 약관 및 개인정보 규정에 동의하시는 것으로 간주합니다." />
+
+        <Button
+            android:id="@+id/reg_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:text="회원가입" />
+
+    </LinearLayout>
+<ProgressBar
+        android:id="@+id/reg_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
