@@ -126,14 +126,11 @@
             android:layout_height="wrap_content"
             android:text="사용 가능한 언어" />
 
-        <EditText
+        <Spinner
             android:id="@+id/languageText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="귀하의 사용 가능한 언어"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="" />
+            android:hint="귀하의 사용 가능한 언어"/>
 
         <TextView
             android:id="@+id/locationLabel"
@@ -141,14 +138,27 @@
             android:layout_height="wrap_content"
             android:text="위치" />
 
-        <EditText
-            android:id="@+id/locationText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="귀하의 위치"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="" />
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/locationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="귀하의 위치"
+                android:ems="10"
+                android:layout_weight="2"
+                android:inputType="textPostalAddress"
+                android:text="" />
+
+            <Button
+                android:id="@+id/find_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:text="검색" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView5"

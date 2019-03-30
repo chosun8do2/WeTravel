@@ -12,12 +12,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,11 +44,13 @@ import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    static final int REQ_ADD_CONTACT = 1;
+
     private EditText reg_email_field;
     private EditText reg_pass_field;
     private EditText reg_confirm_field;
     private EditText reg_name_field;
-    private EditText reg_language_field;
+    private Spinner reg_language_field;
     private EditText reg_location_field;
     private Button reg_btn;
     private ProgressBar reg_progress;
@@ -53,6 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
     private RadioButton btn_woman;
     private RadioGroup rg;
 
+    private Button find_location_button;
     private ImageView profileImage;
     private TextView profileImageText;
 
@@ -66,6 +72,9 @@ public class RegisterActivity extends AppCompatActivity {
     private int gender;
 
     private String str_Qtype;
+    String reg_language;
+
+    String[] item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
         reg_pass_field = (EditText) findViewById(R.id.passwardText);
         reg_confirm_field = (EditText) findViewById(R.id.checkpasswardText);
         reg_name_field = (EditText) findViewById(R.id.nameText);
-        reg_language_field = (EditText) findViewById(R.id.languageText);
+        reg_language_field = (Spinner) findViewById(R.id.languageText);
         reg_location_field = (EditText) findViewById(R.id.locationText);
         btn_man = (RadioButton)findViewById(R.id.man_button);
         btn_woman = (RadioButton)findViewById(R.id.woman_button);
@@ -93,6 +102,25 @@ public class RegisterActivity extends AppCompatActivity {
         profileImage = (ImageView) findViewById(R.id.add_profileImage);
         profileImageText = (TextView) findViewById(R.id.myprofileImageTextView);
 
+        find_location_button = (Button) findViewById(R.id.find_location);
+
+        item = new String[]{"선택하세요","한국어","영어","일본어","중국어", "독일어", "프랑스어", "아랍어"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        reg_language_field.setAdapter(adapter);
+        reg_language_field.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(RegisterActivity.this, item[i], Toast.LENGTH_LONG).show();
+                reg_language = item[i];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 
         btn_man.setOnClickListener(new View.OnClickListener() {
@@ -103,17 +131,22 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        find_location_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, DaumWebViewActivity.class);
+                startActivityForResult(intent, REQ_ADD_CONTACT);
+            }
+        });
+
         reg_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("들어옴?-1");
                 final String email = reg_email_field.getText().toString();
                 String pass = reg_pass_field.getText().toString();
                 String confirm_pass = reg_confirm_field.getText().toString();
-                System.out.println("들어옴?0");
                 if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(pass) && !TextUtils.isEmpty(confirm_pass)){
                     if(pass.equals(confirm_pass)){
-                        System.out.println("들어옴?1");
                         createUser(email, pass);
                     }
                     else {
@@ -217,6 +250,12 @@ public class RegisterActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+        if (requestCode == REQ_ADD_CONTACT) {
+            if (resultCode == RESULT_OK) {
+                String str = data.getStringExtra("location");
+                if(str != null) reg_location_field.setText(str);
+            }
+        }
     }
 
     private void upload(final String email){
@@ -249,7 +288,7 @@ public class RegisterActivity extends AppCompatActivity {
                             SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy-MM-dd");
                             String nowDate = sdfNow.format(date);
                             String name = reg_name_field.getText().toString();
-                            String language = reg_language_field.getText().toString();
+                            String language = reg_language;
                             String location = reg_location_field.getText().toString();
                             writeNewUser(email, nowDate, name, language, location);
                             sendToLogin();

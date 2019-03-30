@@ -1,5 +1,6 @@
 package org.mrlee.wetravel;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -8,6 +9,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -60,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private Button loginRegBtn;
     private LoginButton loginButton;
+    private Button find_passward_Button;
 
     private ProgressBar loginProgress;
 
@@ -78,12 +81,63 @@ public class LoginActivity extends AppCompatActivity {
         if(actionBar != null) actionBar.hide();
         // 파이어베이스 인증 객체 선언
         firebaseAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.passward);
         loginBtn = (Button) findViewById(R.id.login);
         loginRegBtn = (Button) findViewById(R.id.register);
         loginProgress = (ProgressBar) findViewById(R.id.login_progress);
+        find_passward_Button = (Button) findViewById(R.id.find_passward);
+
+        find_passward_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder ad = new AlertDialog.Builder(LoginActivity.this);
+
+                ad.setTitle("비밀번호 찾기");       // 제목 설정
+                ad.setMessage("비밀번호를 찾을 이메일을 입력해주세요!");   // 내용 설정
+
+                // EditText 삽입하기
+                final EditText et = new EditText(LoginActivity.this);
+                ad.setView(et);
+
+                // 확인 버튼 설정
+                ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Text 값 받기
+                        String value = et.getText().toString();
+                        mAuth.sendPasswordResetEmail(value)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(LoginActivity.this, "해당 메일로 비밀번호 재설정 메일을 보냈습니다! 메일을 확인해주세요.", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+                                            Toast.makeText(LoginActivity.this, "메일 형식이 잘못되었거나 가입되지 않은 메일입니다!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                        dialog.dismiss();     //닫기
+                        // Event
+                    }
+                });
+
+                // 취소 버튼 설정
+                ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();     //닫기
+                        // Event
+                    }
+                });
+                // 창 띄우기
+                ad.show();
+            }
+        });
 
         // 페이스북 콜백 등록
         callbackManager = CallbackManager.Factory.create();

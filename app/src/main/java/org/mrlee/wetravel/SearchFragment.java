@@ -72,7 +72,8 @@ public class SearchFragment extends Fragment {
                     Board get = postSnapshot.getValue(Board.class);
                     if(key != null) {
                         //System.out.println("값 확인 테스트:"+ key + " " + get.getTitle().toString());
-                        myDataset.add(new MyData(get.getTitle(), get.getImage(), get.getContent(), get.getStartday(), get.getEndday(), false));
+                        if(get.getTitle() != null)
+                            myDataset.add(new MyData(get.getTitle(), get.getImage(), get.getContent(), get.getStartday(), get.getEndday(), false));
                         //Glide.with(getContext()).load(storageRef).transition(DrawableTransitionOptions.withCrossFade()).into(imageView);
                     }
                 }
