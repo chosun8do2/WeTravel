@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -29,12 +28,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener {
         // each data item is just a string in this case
         public ImageView mImageView;
-        public TextView mTextView;
+        public TextView mDate;
+        public TextView mTitle;
+        public TextView mName;
+        public TextView mCountry;
 
         public ViewHolder(View view) {
             super(view);
             mImageView = (ImageView)view.findViewById(R.id.image);
-            mTextView = (TextView)view.findViewById(R.id.textview);
+            mDate = (TextView)view.findViewById(R.id.date);
+            mTitle = (TextView)view.findViewById(R.id.title);
+            mName = (TextView)view.findViewById(R.id.myprofile_car);
+            mCountry = (TextView)view.findViewById(R.id.country);
             view.setOnClickListener(this);
         }
 
@@ -77,10 +82,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(mDataset.get(position).text);
+        holder.mDate.setText(mDataset.get(position).startday + " ~ " + mDataset.get(position).endday);
+        holder.mTitle.setText(mDataset.get(position).text);
+        holder.mName.setText(mDataset.get(position).name);
+        holder.mCountry.setText(mDataset.get(position).country);
         String filename = "board/"+ mDataset.get(position).img;
         storageRef = FirebaseStorage.getInstance().getReference(filename);
-        Glide.with(holder.mImageView.getContext()).load(storageRef).transition(DrawableTransitionOptions.withCrossFade()).into(holder.mImageView);
+        Glide.with(holder.mImageView.getContext()).load(storageRef).into(holder.mImageView);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -97,12 +105,19 @@ class MyData{
     public String content;
     public String startday;
     public String endday;
-    public MyData(String text, String img, String content, String startday, String endday, boolean isEdit){
+    public String country;
+    public String name;
+    public MyData() {
+
+    }
+    public MyData(String text, String img, String content, String startday, String endday, String country, String name, boolean isEdit){
         this.text = text;
         this.img = img;
         this.content = content;
         this.startday = startday;
         this.endday = endday;
         this.isEdit = isEdit;
+        this.country = country;
+        this.name = name;
     }
 }

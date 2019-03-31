@@ -1,252 +1,579 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-tools:context=".SurveyActivity">
-
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="17dp"
-    android:layout_marginBottom="20dp"
-    android:text="회원님의 느낌을 알고싶어요!"
-    android:textAllCaps="false"
-    android:textColor="@color/colorPrimary"
-    android:textSize="20sp"
-    android:textStyle="bold"
-    app:fontFamily="casual" />
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="4dp"
-        android:text="당신의 연령대는 어디에 해당합니까?                                "
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        >
-
-        <RadioButton
-            android:id="@+id/rg1_bt1"
-            android:checked="true"
-            android:buttonTint="@color/colorPrimary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="20-24" />
-
-        <RadioButton
-            android:id="@+id/rg1_bt2"
-            android:buttonTint="@color/colorPrimary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="25-29" />
-
-        <RadioButton
-            android:id="@+id/rg1_bt3"
-            android:buttonTint="@color/colorPrimary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="30-34" />
-
-        <RadioButton
-            android:id="@+id/rg1_bt4"
-            android:buttonTint="@color/colorPrimary"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="35-39" />
-
-        <RadioButton
-            android:id="@+id/rg1_bt5"
-            android:buttonTint="@color/colorPrimary"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="40대 이상" />
-    </RadioGroup>
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="4dp"
-        android:text="흡연 하시나요?                   "
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        >
-
-        <RadioButton
-            android:id="@+id/rg2_bt1"
-            android:buttonTint="@color/colorPrimary"
-            android:checked="true"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="네" />
-
-        <RadioButton
-            android:id="@+id/rg2_bt2"
-            android:buttonTint="@color/colorPrimary"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="아니요" />
-
-    </RadioGroup>
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="4dp"
-        android:text="술 좋아하시나요?                                       "
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginBottom="10dp"
-        >
-
-        <RadioButton
-            android:id="@+id/rg3_bt1"
-            android:buttonTint="@color/colorPrimary"
-            android:checked="true"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="네" />
-
-        <RadioButton
-            android:id="@+id/rg3_bt2"
-            android:buttonTint="@color/colorPrimary"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="아니요" />
-
-        <RadioButton
-            android:id="@+id/rg3_bt3"
-            android:buttonTint="@color/colorPrimary"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="조금.." />
-    </RadioGroup>
-</LinearLayout>
-
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="4dp"
-        android:text="함께 여행하고 싶은 사람은 몇 명 인가요?                         "
-        android:textSize="16sp"
-        android:textStyle="bold" />
-
-    <RadioGroup
-
-        android:layout_marginBottom="40dp"
-        android:id="@+id/radioGroup4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:checked="true"
-            android:buttonTint="@color/colorPrimary"
-            android:id="@+id/rg4_bt1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="1명" />
-
-        <RadioButton
-            android:buttonTint="@color/colorPrimary"
-            android:id="@+id/rg4_bt2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="2명" />
-
-        <RadioButton
-            android:buttonTint="@color/colorPrimary"
-            android:id="@+id/rg4_bt3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="3명" />
-
-        <RadioButton
-            android:buttonTint="@color/colorPrimary"
-            android:id="@+id/rg4_bt4"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="4명    이상" />
-
-        <RadioButton
-            android:buttonTint="@color/colorPrimary"
-            android:id="@+id/rg4_bt5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="상관  없다" />
-    </RadioGroup>
-</LinearLayout>
-
-    <Button
-        android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:backgroundTint="@color/colorPrimary"
-        android:text="제출하기"
-        android:textColor="@android:color/background_light" />
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="15dp"
+        android:text="회원님에 대해 알고싶어요!"
+        android:textAllCaps="false"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:fontFamily="casual" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="연령대                                "
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rg1_bt1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="true"
+                        android:text="20-24"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg1_bt2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="25-29"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg1_bt3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="30-34"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg1_bt4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="35-39"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg1_bt5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="40대 이상"
+                        android:textSize="12sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="흡연여부                                                                                     "
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rg2_bt1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="true"
+                        android:text="많이 핀다"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg2_bt2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="가끔 핀다"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg2_bt3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="안핀다"
+                        android:textSize="12sp" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="코골이여부                                                                                "
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rg3_bt1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="true"
+                        android:text="심하다"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg3_bt2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="가끔 곤다"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg3_bt3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="거의 골지 않는다"
+                        android:textSize="12sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="여행타입                                                                                "
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup4"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rg4_bt1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="true"
+                        android:text="꼼꼼히 계획한다"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg4_bt2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="루트만 계획한다"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg4_bt3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="무계획이 계획이다"
+                        android:textSize="12sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="사진 찍기                                                                                "
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup5"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rg5_bt1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="true"
+                        android:text="자주 찍는다"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg5_bt2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="중요한 것만 찍는다"
+                        android:textSize="12sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="주량                                                                               "
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup6"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rg6_bt1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="true"
+                        android:text="0"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg6_bt2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="0.5"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg6_bt3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="0.5-1"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg6_bt4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="1-1.5"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg6_bt5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="1.5-2"
+                        android:textSize="12sp" />
+
+                    <RadioButton
+                        android:id="@+id/rg6_bt6"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="2 이상"
+                        android:textSize="12sp" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="선호하는 주류(다중선택 가능)                                             "
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup7"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/rg7_bt1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="true"
+                        android:text="맥주"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg7_bt2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="소주"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg7_bt3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="와인"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg7_bt4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="양주"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg7_bt5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="샴페인"
+                        android:textSize="12sp" />
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="선호하는 숙소(다중선택 가능)                                             "
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/rg8_bt1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="true"
+                        android:text="호텔"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg8_bt2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="호스텔"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg8_bt3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="게스트하우스"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg8_bt4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="한인민박"
+                        android:textSize="12sp" />
+
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="선호하는 교통수단(다중선택 가능)                                             "
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroup9"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/rg9_bt1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:checked="true"
+                        android:text="기차"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg9_bt2"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="버스"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg9_bt3"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="지하철"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg9_bt4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="택시"
+                        android:textSize="12sp" />
+
+                    <CheckBox
+                        android:id="@+id/rg9_bt5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:buttonTint="@color/colorPrimary"
+                        android:text="도보"
+                        android:textSize="12sp" />
+
+                </RadioGroup>
+            </LinearLayout>
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="제출하기"
+                android:textColor="@android:color/background_light" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

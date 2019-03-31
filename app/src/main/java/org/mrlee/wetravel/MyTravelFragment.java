@@ -61,12 +61,14 @@ public class MyTravelFragment extends Fragment {
         mDatabase.child("board").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                myDataset.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
                     Board get = postSnapshot.getValue(Board.class);
                     if(key != null) {
                         if(get.getUser().equals(mAuth.getCurrentUser().getEmail().toString())) {
-                            myDataset.add(new MyData(get.getTitle(), get.getImage(), get.getContent(), get.getStartday(), get.getEndday(), true));
+                            MyData temp = new MyData(get.getTitle(), get.getImage(), get.getContent(), get.getStartday(), get.getEndday(), get.getCountry(), get.getName(), false);
+                            myDataset.add(temp);
                         }
                     }
                 }

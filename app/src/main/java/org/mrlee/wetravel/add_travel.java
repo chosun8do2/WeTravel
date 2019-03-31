@@ -15,19 +15,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -35,8 +41,13 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Locale;
 
 public class add_travel extends AppCompatActivity {
 
@@ -55,8 +66,16 @@ public class add_travel extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private String imageName;
 
+    private Spinner spinner;
+
+    ArrayList<String> arrayList;
+    ArrayAdapter<String> arrayAdapter;
+    String countryName;
+    String userName;
+
     FirebaseDatabase database;
     DatabaseReference myRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +107,63 @@ public class add_travel extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
+
+        arrayList = new ArrayList<>();
+
+        Locale[] availableLocales = Locale.getAvailableLocales();
+        for(Locale locale : availableLocales){
+            String code = locale.getCountry();
+            String name = locale.getDisplayCountry();
+            String ename = locale.getDisplayCountry(Locale.KOREA);
+            if(ename != "" && !arrayList.contains(ename)) arrayList.add(ename);
+        }
+        Collections.sort(arrayList);
+        arrayList.add(0, "여행할 국가를 선택하세요!");
+        arrayAdapter = new ArrayAdapter<>(getApplicationContext(),
+                android.R.layout.simple_spinner_dropdown_item,
+                arrayList);
+
+        spinner = (Spinner)findViewById(R.id.country);
+        spinner.setAdapter(arrayAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //Toast.makeText(getApplicationContext(),arrayList.get(i)+"가 선택되었습니다.", Toast.LENGTH_SHORT).show();
+                if(i != 0) countryName = arrayList.get(i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinner.setSelection(0);
+        countryName = "선택안함";
+        userName = "게스트";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_HH");
+        startDay = formatter.format(new Date());
+        endDay = formatter.format(new Date());
+
+        myRef = FirebaseDatabase.getInstance().getReference();
+        myRef.child("users").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    String key = postSnapshot.getKey();
+                    User get = postSnapshot.getValue(User.class);
+                    if(key != null && get.getEmail() != null) {
+                        if(get.getEmail().equals(mAuth.getCurrentUser().getEmail())) {
+                            userName = get.getName();
+                            break;
+                        }
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
     //결과 처리
     @Override
@@ -140,8 +216,10 @@ public class add_travel extends AppCompatActivity {
                             myRef.child("board").child(filename).child("content").setValue(content.getText().toString());
                             myRef.child("board").child(filename).child("startday").setValue(startDay);
                             myRef.child("board").child(filename).child("endday").setValue(endDay);
+                            myRef.child("board").child(filename).child("country").setValue(countryName);
+                            myRef.child("board").child(filename).child("name").setValue(userName);
                             Toast.makeText(getApplicationContext(), "업로드 완료!", Toast.LENGTH_SHORT).show();
-
+                            finish();
                         }
                     })
                     //실패시
@@ -223,3 +301,5 @@ public class add_travel extends AppCompatActivity {
         });
     }
 }
+
+class AscendingString implements Comparator<String> { @Override public int compare(String a, String b) { return b.compareTo(a); } }

@@ -11,6 +11,26 @@ public class Board {
     private String user;
     private String title;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    private String country;
+
     public String getStartday() {
         return startday;
     }
@@ -51,13 +71,15 @@ public class Board {
 
     private String content;
 
-    public Board(String user, String image, String title, String content, String startday, String endday) {
+    public Board(String user, String image, String title, String content, String startday, String endday, String country, String name) {
         this.user = user;
         this.image = image;
         this.title = title;
         this.content = content;
         this.startday = startday;
         this.endday = endday;
+        this.country = country;
+        this.name = name;
     }
 
     public String getUser() {
@@ -85,6 +107,8 @@ public class Board {
         result.put("content", content);
         result.put("startday", startday);
         result.put("endday", endday);
+        result.put("country", country);
+        result.put("name", name);
         return result;
     }
 }

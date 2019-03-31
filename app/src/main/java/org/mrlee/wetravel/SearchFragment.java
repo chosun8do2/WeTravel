@@ -66,14 +66,14 @@ public class SearchFragment extends Fragment {
         mDatabase.child("board").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //myDataset = new ArrayList<MyData>();
+                myDataset.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
                     Board get = postSnapshot.getValue(Board.class);
                     if(key != null) {
                         //System.out.println("값 확인 테스트:"+ key + " " + get.getTitle().toString());
-                        if(get.getTitle() != null)
-                            myDataset.add(new MyData(get.getTitle(), get.getImage(), get.getContent(), get.getStartday(), get.getEndday(), false));
+                            MyData temp = new MyData(get.getTitle(), get.getImage(), get.getContent(), get.getStartday(), get.getEndday(), get.getCountry(), get.getName(), false);
+                            myDataset.add(temp);
                         //Glide.with(getContext()).load(storageRef).transition(DrawableTransitionOptions.withCrossFade()).into(imageView);
                     }
                 }
@@ -87,6 +87,7 @@ public class SearchFragment extends Fragment {
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(48));
 
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(getContext());
@@ -191,5 +192,17 @@ public class SearchFragment extends Fragment {
             f4.setVisibility(View.VISIBLE);
             isFabOpen = true;
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //myDataset = new ArrayList<MyData>();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
     }
 }
