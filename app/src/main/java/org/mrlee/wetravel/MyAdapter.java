@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -21,6 +24,10 @@ import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private ArrayList<MyData> mDataset;
     private StorageReference storageRef;
+
+    FirebaseDatabase database;
+    DatabaseReference myRef;
+    private FirebaseAuth mAuth;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -47,8 +54,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         public void onClick(View v) {
 
             System.out.println(getPosition());
+            mAuth = FirebaseAuth.getInstance();
+            String currentUser = mAuth.getCurrentUser().getEmail();
             Intent intent;
-            if(mDataset.get(getPosition()).isEdit) intent = new Intent(v.getContext() , edit_travel.class);
+            if(mDataset.get(getPosition()).user.equals(currentUser)) intent = new Intent(v.getContext() , edit_travel.class);
             else intent = new Intent(v.getContext() , view_travel.class);
 
             intent.putExtra("title", mDataset.get(getPosition()).text);
@@ -56,6 +65,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             intent.putExtra("image", mDataset.get(getPosition()).img);
             intent.putExtra("startday", mDataset.get(getPosition()).startday);
             intent.putExtra("endday", mDataset.get(getPosition()).endday);
+            intent.putExtra("country", mDataset.get(getPosition()).country);
+            intent.putExtra("name", mDataset.get(getPosition()).name);
+            intent.putExtra("key", mDataset.get(getPosition()).key);
 
             v.getContext().startActivity(intent);
         }
@@ -107,17 +119,20 @@ class MyData{
     public String endday;
     public String country;
     public String name;
+    public String user;
+    public String key;
     public MyData() {
 
     }
-    public MyData(String text, String img, String content, String startday, String endday, String country, String name, boolean isEdit){
+    public MyData(String text, String img, String content, String startday, String endday, String country, String name, String user, String key){
         this.text = text;
         this.img = img;
         this.content = content;
         this.startday = startday;
         this.endday = endday;
-        this.isEdit = isEdit;
         this.country = country;
         this.name = name;
+        this.user = user;
+        this.key = key;
     }
 }

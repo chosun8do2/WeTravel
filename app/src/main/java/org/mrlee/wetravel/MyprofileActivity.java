@@ -160,10 +160,8 @@ public class MyprofileActivity extends AppCompatActivity {
             try {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                file = new File(String.valueOf(filePath));
                 upload(mAuth.getCurrentUser().getEmail());
                 profile.setImageBitmap(bitmap);
-                file.delete();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -191,7 +189,6 @@ public class MyprofileActivity extends AppCompatActivity {
                 @Override
                 public void onSuccess(Void aVoid) {
                     // File deleted successfully
-                    file.delete();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override

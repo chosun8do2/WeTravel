@@ -57,7 +57,7 @@ public class add_travel extends AppCompatActivity {
     private EditText title, content;
 
     private ImageView add_image;
-    private ImageButton pre_btn, save_btn, del_btn;
+    private ImageButton pre_btn, save_btn, del_btn, back_btn;;
 
     private Uri filePath;
     private String boardTitle = "";
@@ -88,6 +88,19 @@ public class add_travel extends AppCompatActivity {
         pre_btn = (ImageButton) findViewById(R.id.view_btn);
         save_btn = (ImageButton) findViewById(R.id.save_btn);
         del_btn = (ImageButton) findViewById(R.id.del_btn);
+        back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        del_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         add_image.setOnClickListener(new View.OnClickListener() {
             @Override

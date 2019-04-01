@@ -67,7 +67,7 @@ public class MyTravelFragment extends Fragment {
                     Board get = postSnapshot.getValue(Board.class);
                     if(key != null) {
                         if(get.getUser().equals(mAuth.getCurrentUser().getEmail().toString())) {
-                            MyData temp = new MyData(get.getTitle(), get.getImage(), get.getContent(), get.getStartday(), get.getEndday(), get.getCountry(), get.getName(), false);
+                            MyData temp = new MyData(get.getTitle(), get.getImage(), get.getContent(), get.getStartday(), get.getEndday(), get.getCountry(), get.getName(), get.getUser(), key);
                             myDataset.add(temp);
                         }
                     }

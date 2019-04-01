@@ -69,10 +69,11 @@ public class SearchFragment extends Fragment {
                 myDataset.clear();
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                     String key = postSnapshot.getKey();
+
                     Board get = postSnapshot.getValue(Board.class);
                     if(key != null) {
                         //System.out.println("값 확인 테스트:"+ key + " " + get.getTitle().toString());
-                            MyData temp = new MyData(get.getTitle(), get.getImage(), get.getContent(), get.getStartday(), get.getEndday(), get.getCountry(), get.getName(), false);
+                            MyData temp = new MyData(get.getTitle(), get.getImage(), get.getContent(), get.getStartday(), get.getEndday(), get.getCountry(), get.getName(), get.getUser(), key);
                             myDataset.add(temp);
                         //Glide.with(getContext()).load(storageRef).transition(DrawableTransitionOptions.withCrossFade()).into(imageView);
                     }
