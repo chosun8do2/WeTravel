@@ -47,6 +47,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 public class add_travel extends AppCompatActivity {
@@ -72,6 +73,8 @@ public class add_travel extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     String countryName;
     String userName;
+
+    int start_year, start_month, start_date;
 
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -101,6 +104,10 @@ public class add_travel extends AppCompatActivity {
                 finish();
             }
         });
+
+        start_date = -1;
+        start_month = -1;
+        start_year = -1;
 
         add_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -283,6 +290,9 @@ public class add_travel extends AppCompatActivity {
                 DatePickerDialog dialog = new DatePickerDialog(add_travel.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+                        start_year = year;
+                        start_month = month;
+                        start_date = date;
                         String msg = String.format("%d 년 %d 월 %d 일", year, month+1, date);
                         startDay = String.format("%d-%d-%d", year, month+1, date);
                         Toast.makeText(add_travel.this, msg, Toast.LENGTH_SHORT).show();
@@ -297,20 +307,24 @@ public class add_travel extends AppCompatActivity {
         end_day.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (start_date != -1 && start_month != -1 && start_year != -1) {
                     DatePickerDialog dialog = new DatePickerDialog(add_travel.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-
                             String msg = String.format("%d 년 %d 월 %d 일", year, month + 1, date);
-                            endDay = String.format("%d-%d-%d", year, month+1, date);
+                            endDay = String.format("%d-%d-%d", year, month + 1, date);
                             Toast.makeText(add_travel.this, msg, Toast.LENGTH_SHORT).show();
                             end_day.setText(msg);
                         }
                     }, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
-
-                    dialog.getDatePicker().setMinDate(new Date().getTime()-1);    //입력한 날짜 이후로 클릭 안되게 옵션
+                    Date date = new GregorianCalendar(start_year, start_month, start_date).getTime();
+                    dialog.getDatePicker().setMinDate(date.getTime());    //입력한 날짜 이후로 클릭 안되게 옵션
                     dialog.show();
                 }
+                else {
+                    Toast.makeText(getApplicationContext(), "시작 날짜를 먼저 선택하세요.", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
     }
 }

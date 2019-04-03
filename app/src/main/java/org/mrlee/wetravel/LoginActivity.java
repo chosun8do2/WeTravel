@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,11 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +33,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
@@ -127,23 +136,31 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email");
+        loginButton.setReadPermissions("email", "public_profile", "user_location");
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
+                Log.d("Success", String.valueOf(loginResult.getAccessToken()));
+                Log.d("Success", String.valueOf(Profile.getCurrentProfile().getId()));
+                Log.d("Success", String.valueOf(Profile.getCurrentProfile().getName()));
+                Log.d("Success", String.valueOf(Profile.getCurrentProfile().getProfilePictureUri(200, 200)));
+                requestUserProfile(loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
             @Override
             public void onCancel() {
-                // App code
+                Toast.makeText(getBaseContext(), "페이스북 로그인을 취소하셨습니다.", Toast.LENGTH_LONG).show();
             }
+
             @Override
             public void onError(FacebookException exception) {
-                // App code
+                Toast.makeText(getBaseContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+
+
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -251,6 +268,42 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    public void requestUserProfile(LoginResult loginResult){
+        GraphRequest request = GraphRequest.newMeRequest(
+                loginResult.getAccessToken(),
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                        try {
+                            String email = object.getString("email");
+                            Log.e("object", object.toString());
+                            Log.e("response", response.toString());
+                            //JSONObject jsonobject_location = object.getJSONObject("location");
+                            //String str_location = jsonobject_location.getString("name");
+                            //String gender = response.getJSONObject().getString("gender");
+                            //String locale = response.getJSONObject().getString("locale");
+                            //String language = response.getJSONObject().getString("languages");
+                            //String location = response.getJSONObject().getString("location");
+                            Log.d("Result", email);
+                            //Log.d("Result", gender);
+                            //Log.d("Result", locale);
+                            //Log.d("Result", language);
+                            //Log.d("Result", str_location);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "email");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+    /****************************************************************************************************************
+     * Facebook
+     ****************************************************************************************************************/
     // 페이스북 로그인 이벤트
 // 사용자가 정상적으로 로그인한 후 페이스북 로그인 버튼의 onSuccess 콜백 메소드에서 로그인한 사용자의
 // 액세스 토큰을 가져와서 Firebase 사용자 인증 정보로 교환하고,
@@ -278,7 +331,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         super.onActivityResult(requestCode, resultCode, data);
-
         // 페이스북 콜백 등록
         callbackManager.onActivityResult(requestCode, resultCode, data);
 

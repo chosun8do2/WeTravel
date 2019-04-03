@@ -1,6 +1,7 @@
 package org.mrlee.wetravel;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -43,8 +44,20 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
+        String channelId = "channel";
+        String channelName = "Channel Name";
+
+        NotificationManager notificationManager = (NotificationManager) getSystemService  (Context.NOTIFICATION_SERVICE);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel mChannel = new NotificationChannel(channelId, channelName, importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+
         NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this)
+                new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(title)
                         .setContentText(text)
@@ -52,10 +65,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                         .setSound(defaultSoundUri)
                         .setPriority(Notification.PRIORITY_HIGH)
                         .setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
 }
